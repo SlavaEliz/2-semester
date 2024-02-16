@@ -10,7 +10,7 @@ void func (double x, int n, int i) {
     if (i <= n) {
         F = cos((((2*i) - 1) * x)/(((2*i) - 1)^2));
     }
-    S = S + F;
+    S += F;
     if (i == n) {
         cout << "Сумма равна " << S << endl;
         cout << i;
