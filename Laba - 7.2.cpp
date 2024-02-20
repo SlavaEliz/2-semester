@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std; 
 
 int daysPassed(int day1, int month1, int year1, int day2, int month2, int year2) {
     const int daysInMonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -23,10 +24,11 @@ int daysPassed(int day1, int month1, int year1, int day2, int month2, int year2)
 }
 
 int main() {
+    setlocale(LC_ALL, "RUS");
     int day1 = 1, month1 = 1, year1 = 2021;
     int day2 = 5, month2 = 1, year2 = 2021;
 
-    std::cout << "Number of days passed: " << daysPassed(day1, month1, year1, day2, month2, year2) << std::endl;
+    cout << "Дней прошло: " << daysPassed(day1, month1, year1, day2, month2, year2) << endl;
 
     return 0;
 }
