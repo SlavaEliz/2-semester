@@ -1,26 +1,32 @@
 #include <iostream>
-#include <ctime>
 
-int countDaysBetweenDates(int day1, int month1, int year1, int day2, int month2, int year2) {
-    std::tm timeinfo1 = {0, 0, 0, day1, month1 - 1, year1 - 1900};
-    std::tm timeinfo2 = {0, 0, 0, day2, month2 - 1, year2 - 1900};
+int daysPassed(int day1, int month1, int year1, int day2, int month2, int year2) {
+    const int daysInMonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int days = 0;
 
-    std::time_t time1 = std::mktime(&timeinfo1);
-    std::time_t time2 = std::mktime(&timeinfo2);
+    while (day1 != day2 || month1 != month2 || year1 != year2) {
+        days++;
+        day1++;
 
-    double seconds = std::difftime(time2, time1);
-    double days = seconds / (60 * 60 * 24);
+        if (day1 > daysInMonth[month1 - 1]) {
+            day1 = 1;
+            month1++;
+        }
 
-    return static_cast<int>(days);
+        if (month1 > 12) {
+            month1 = 1;
+            year1++;
+        }
+    }
+
+    return days;
 }
 
 int main() {
     int day1 = 1, month1 = 1, year1 = 2021;
-    int day2 = 4, month2 = 2, year2 = 2021;
+    int day2 = 5, month2 = 1, year2 = 2021;
 
-    int daysBetween = countDaysBetweenDates(day1, month1, year1, day2, month2, year2);
-
-    std::cout << "Number of days between the two dates: " << daysBetween << std::endl;
+    std::cout << "Number of days passed: " << daysPassed(day1, month1, year1, day2, month2, year2) << std::endl;
 
     return 0;
 }
