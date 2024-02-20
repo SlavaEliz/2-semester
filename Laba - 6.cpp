@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    string text = "no info on this text, no brain in the head.";
+    string text = "no info, no mind, no brain, head empty.";
     string word;
     int maxCount = 0;
     string mostFrequentWord;
