@@ -1,35 +1,33 @@
 #include <iostream>
 #include <string>
-#include <unordered_map>
-#include <sstream>
 
-std::string findMostFrequentWord(const std::string& str) {
-    std::unordered_map<std::string, int> wordFreq;
-    std::istringstream iss(str);
-    std::string word;
-    
-    while (iss >> word) {
-        wordFreq[word]++;
-    }
+using namespace std;
 
-    std::string mostFrequentWord;
-    int maxFreq = 0;
+int main() {
+    string input;
+    getline(cin, input, '.');
 
-    for (const auto& pair : wordFreq) {
-        if (pair.second > maxFreq) {
-            maxFreq = pair.second;
-            mostFrequentWord = pair.first;
+    string mostFrequentWord;
+    int maxCount = 0;
+
+    string currentWord = "";
+    int currentCount = 0;
+
+    for (char c : input) {
+        if (c == ' ') {
+            if (currentCount > maxCount) {
+                maxCount = currentCount;
+                mostFrequentWord = currentWord;
+            }
+            currentWord = "";
+            currentCount = 0;
+        } else {
+            currentWord += c;
+            currentCount++;
         }
     }
 
-    return mostFrequentWord;
-}
-
-int main() {
-    std::string text = "no info in this text, no mind on a head";
-    std::string mostFrequent = findMostFrequentWord(text);
-    
-    std::cout << "The most frequent word is: " << mostFrequent << std::endl;
+    cout << "Most frequently occurring word: " << mostFrequentWord << endl;
 
     return 0;
 }
