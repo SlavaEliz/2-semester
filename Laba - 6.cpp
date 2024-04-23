@@ -4,35 +4,35 @@
 using namespace std;
 
 int main() {
-    string text = "no info, no mind, no brain, head empty.";
-    string word;
-    int maxCount = 0;
-    string mostFrequentWord;
+    system("chcp 1251 > NULL");
+    string input, word, mostCommon;
+    int maxCount = 0, count;
 
-    for (int i = 0; i < text.size(); ++i) {
-        if (text[i] != ' ' && text[i] != '.') {
-            word += text[i];
-        } else {
-            int count = 0;
-            for (int j = 0; j < text.size(); ++j) {
-                string temp;
-                while (j < text.size() && text[j] != ' ' && text[j] != '.') {
-                    temp += text[j];
-                    ++j;
+    getline(cin, input);
+
+    input += " ";
+    for (int i = 0; i < input.size(); i++) {
+        if (input[i] == ' ') {
+            if (!word.empty()) {
+                count = 1;
+                for (int j = i + 1; j < input.size(); j++) {
+                    if (input.substr(j, word.size()) == word) {
+                        count++;
+                    }
                 }
-                if (temp == word) {
-                    ++count;
+                if (count > maxCount) {
+                    maxCount = count;
+                    mostCommon = word;
                 }
+                word = "";
             }
-            if (count > maxCount) {
-                maxCount = count;
-                mostFrequentWord = word;
-            }
-            word = "";
+        }
+        else {
+            word += input[i];
         }
     }
 
-    cout << "The most frequent word is: " << mostFrequentWord << endl;
+    cout << mostCommon;
 
     return 0;
 }
